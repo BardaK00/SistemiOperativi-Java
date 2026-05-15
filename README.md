@@ -1,6 +1,6 @@
 🧵 Java Multithreading Exercises
 
-Repository containing my Java multithreading pkexercises developed during the Operating Systems course at the
+Repository containing my Java multithreading exercises developed during the Operating Systems course at the
 🎓 University of Calabria (Università della Calabria).
 
 The goal of this repository is to explore and practice:

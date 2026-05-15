@@ -1,4 +1,4 @@
-package Semaphore.SicronizzazioneSemafori;
+package Semaphore.SincronizzazioneSemafori;
 
 public class ThreadP2 extends AbstractThreadSync implements Runnable {
 

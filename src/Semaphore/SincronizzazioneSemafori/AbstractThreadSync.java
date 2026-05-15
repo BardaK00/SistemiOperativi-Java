@@ -1,4 +1,4 @@
-package Semaphore.SicronizzazioneSemafori;
+package Semaphore.SincronizzazioneSemafori;
 
 import java.util.concurrent.Semaphore;
 

@@ -1,4 +1,4 @@
-package Semaphore.SicronizzazioneSemafori;
+package Semaphore.SincronizzazioneSemafori;
 
 public class Main {
     public static void main(String[] args) {
