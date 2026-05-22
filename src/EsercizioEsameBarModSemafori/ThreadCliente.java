@@ -3,11 +3,13 @@ package EsercizioEsameBarModSemafori;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadCliente extends Thread{
-    private BarConcreto bar;
+    private Bar bar;
 
-    public ThreadCliente(BarConcreto b){
+    public ThreadCliente(Bar b){bar = b;}
+    public ThreadCliente(BarConcretoSemafori b){
         bar = b;
     }
+
 
     @Override
     public void run() {
@@ -19,23 +21,19 @@ public class ThreadCliente extends Thread{
 
         if (i == 0){
             try{
-                bar.semCassa.acquire();
-                bar.inizia(i);
-                bar.finisci(i);
+                bar.inizia(i); //acquire
+                bar.finisci(i); //release
                 TimeUnit.SECONDS.sleep(5);
-                bar.semBancone.acquire();
-                bar.inizia(i+1);
-                bar.finisci(i+1);
+                bar.inizia(i+1);//acquire
+                bar.finisci(i+1);//release
             }
             catch(Exception e){e.printStackTrace();}
 
         }else{
             try{
-                bar.semBancone.acquire();
                 bar.inizia(i);
                 bar.finisci(i);
                 TimeUnit.SECONDS.sleep(5);
-                bar.semCassa.acquire();
                 bar.inizia(i-1);
                 bar.finisci(i-1);
             }
