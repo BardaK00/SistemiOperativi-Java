@@ -16,7 +16,7 @@ public class CasaDiCuraImplSemafori implements CasaDiCura{
     @Override
     public void chiamaEIniziaOperazione() throws InterruptedException {
         iniziaOperazione.acquire();
-        System.out.println("il paziente" + Thread.currentThread().getName() + " sta per essere operato");
+        System.out.println("il dottore sta iniziando l'operazione");
         operazioneTerminata.release();
     }
 
@@ -24,7 +24,7 @@ public class CasaDiCuraImplSemafori implements CasaDiCura{
     public void fineOperazione() throws InterruptedException {
         operazioneTerminata.acquire();
         TimeUnit.SECONDS.sleep(ThreadLocalRandom.current().nextInt(10,20+1));
-        System.out.println("il paziente:"+ Thread.currentThread().getName()+" è stato operato");
+        System.out.println("il dottore ha terminato l'operazione");
         System.out.println("avanti il prossimo");
         pazientePuoUscire.release();
         salaOperazione.release();
