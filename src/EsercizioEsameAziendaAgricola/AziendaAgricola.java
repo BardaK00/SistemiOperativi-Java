@@ -5,7 +5,7 @@ import java.util.Random;
 
 public interface AziendaAgricola {
     default int scegliNumeroSacchetti(){
-        return new Random().nextInt(0,10);
+        return new Random().nextInt(1,11);
     };
 
     void iniziaPagamento(int n) throws InterruptedException;
@@ -18,12 +18,12 @@ public interface AziendaAgricola {
     default void test(AziendaAgricola aa) throws InterruptedException {
         LinkedList<Cliente> ll = new LinkedList<>();
         new Magazziniere(aa).start();
-        for (int i = 0;i<100;i++){
+        for (int i = 0;i<5;i++){
             ll.add(new Cliente(this));
         }
         for(Cliente c:ll)c.start();
         for(Cliente c:ll)c.join();
-        System.out.println("tutti i clienti hanno finito e l'azienda agricola ha incassato" + this.incassiTotali());
+        System.out.println("tutti i clienti hanno finito e l'azienda agricola ha incassato:" + this.incassiTotali());
 
     }
 }

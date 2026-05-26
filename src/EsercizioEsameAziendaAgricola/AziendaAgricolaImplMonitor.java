@@ -23,7 +23,7 @@ public class AziendaAgricolaImplMonitor implements AziendaAgricola{
     public void iniziaPagamento(int n) throws InterruptedException {
         l.lock();
         try{
-        System.out.println("il cliente " + Thread.currentThread().getName() + " ha iniziato a pagare");
+        System.out.println("il cliente " + Thread.currentThread().getName() + " ha iniziato a pagare per " + n + "sacchi" );
         incassiTotali += n * costoSacchetto;}finally{l.unlock();}
         //lascio lock e unlock per l'accesso a incassitotali in mutua esclusione
     }
@@ -49,7 +49,7 @@ public class AziendaAgricolaImplMonitor implements AziendaAgricola{
                 while(nonBastanoSacchetti)refillEffettuato.await();
             }
             for(int i = 1;i<n+1;i++){
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(1);
                 System.out.println("il cliente ha ritirato il sacco:" + i + " ne mancano:" + (n-i));
             }
             // nel lock necessario perchè un thread alla volta può ritirare dal magazzino sennò si fotte tutto
