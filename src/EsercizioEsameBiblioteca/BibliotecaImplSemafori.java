@@ -21,6 +21,7 @@ public class BibliotecaImplSemafori extends Biblioteca{
     private Semaphore clienteUscito = new Semaphore(0);
     private int richiesteGestite = 0;
 
+    private String nomeThread = "";
     public BibliotecaImplSemafori(int n) {
         super(n);
     }
@@ -52,6 +53,7 @@ public class BibliotecaImplSemafori extends Biblioteca{
             System.out.println("il bibliotecario ha gestito un prestito di un TESSERATO:" + cliente.getName());
             System.out.println("il cliente può uscire...");
             richiesteGestite++;
+            nomeThread = cliente.getName();
             prestitoGestito.release();
 
         }else if (!llNonTesserati.isEmpty()) {
@@ -60,6 +62,7 @@ public class BibliotecaImplSemafori extends Biblioteca{
 
             System.out.println("il cliente può uscire...");
             richiesteGestite++;
+            nomeThread = cliente.getName();
             prestitoGestito.release();
         }
 
@@ -67,10 +70,22 @@ public class BibliotecaImplSemafori extends Biblioteca{
 
     @Override
     void esci() throws InterruptedException {
-        prestitoGestito.acquire();
-        System.out.println("il cliente è uscito dalla biblioteca");
-        System.out.println("il bibliotecario può chiamare un nuovo utente");
-        clienteUscito.release();
+        boolean uscito = false;
+        while (!uscito) {
+            prestitoGestito.acquire();
+            mutex.acquire();
+            if (Thread.currentThread().getName().equals(nomeThread)) {
+                System.out.println("il cliente " + nomeThread + " è uscito dalla biblioteca");
+                nomeThread = "";
+                uscito = true;
+                mutex.release();
+                System.out.println("il bibliotecario può chiamare un nuovo utente");
+                clienteUscito.release();
+            } else {
+                prestitoGestito.release();
+                mutex.release();
+            }
+        }
     }
     @Override
     void prossimoUtente() throws InterruptedException {
