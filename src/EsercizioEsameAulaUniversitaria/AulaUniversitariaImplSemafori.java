@@ -10,6 +10,7 @@ public class AulaUniversitariaImplSemafori extends AulaUniversitaria{
     private Semaphore esameTerminato = new Semaphore(0);
     private Semaphore puoIniziare = new Semaphore(0);
     private Semaphore possonoConsegnare = new Semaphore(0);
+
     public AulaUniversitariaImplSemafori(int n) {
         super(n); //numeroStudenti
     }

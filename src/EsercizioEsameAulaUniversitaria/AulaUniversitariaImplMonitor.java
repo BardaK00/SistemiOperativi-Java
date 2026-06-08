@@ -59,6 +59,8 @@ public class AulaUniversitariaImplMonitor extends AulaUniversitaria{
         }finally{l.unlock();}
     }
 
+
+
     static void main() {
         AulaUniversitaria au = new AulaUniversitariaImplMonitor(45);
         au.test(au);

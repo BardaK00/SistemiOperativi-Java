@@ -15,6 +15,7 @@ public abstract class AulaUniversitaria {
 
     abstract void fineEsame() throws InterruptedException;
 
+
     public void test(AulaUniversitaria au){
         new Docente(au).start();
         System.out.println("docente startato");
